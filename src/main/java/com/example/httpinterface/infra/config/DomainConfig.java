@@ -2,6 +2,7 @@ package com.example.httpinterface.infra.config;
 
 import com.example.httpinterface.domain.DelegateOEmbedUrlConverter;
 import com.example.httpinterface.domain.OEmbedUrlConverter;
+import com.example.httpinterface.domain.TwitterOEmbedUrlConverter;
 import com.example.httpinterface.domain.YoutubeOEmbedUrlConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,11 @@ public class DomainConfig {
     @Bean
     public OEmbedUrlConverter youtubeOEmbedUrlConverter() {
         return new YoutubeOEmbedUrlConverter();
+    }
+
+    @Bean
+    public OEmbedUrlConverter twitterOEmbedUrlConverter() {
+        return new TwitterOEmbedUrlConverter();
     }
 
 }
