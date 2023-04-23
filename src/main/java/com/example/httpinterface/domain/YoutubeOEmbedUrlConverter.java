@@ -1,19 +1,14 @@
 package com.example.httpinterface.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.httpinterface.domain.utils.UrlUtils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Pattern;
 
 public class YoutubeOEmbedUrlConverter implements OEmbedUrlConverter {
 
-    private static final Logger log = LoggerFactory.getLogger(YoutubeOEmbedUrlConverter.class);
-
     @Override
     public boolean convertable(String url) {
-        String hostUrl = getHostUrl(url);
+        String hostUrl = UrlUtils.getHostUrl(url);
 
         switch (hostUrl) {
             case "www.youtube.com":
@@ -39,22 +34,6 @@ public class YoutubeOEmbedUrlConverter implements OEmbedUrlConverter {
     @Override
     public String convert(String url) {
         return "https://www.youtube.com/oembed?url=" + url;
-    }
-
-    public String getHostUrl(String url) {
-        String hostUrl;
-
-        try{
-            hostUrl = new URL(url).getHost();
-        }
-        catch (MalformedURLException e) {
-            log.error("Invalid url : {}", url);
-            throw new IllegalArgumentException("Invalid URL pattern.");
-        }
-
-        if (hostUrl == null) throw new IllegalArgumentException("This URL pattern is null.");
-
-        return hostUrl;
     }
 
 }
